@@ -19,9 +19,9 @@ def convierteRomanoArabigo(numero):
         numero =  int(numero)
         return numero
     except ValueError: #EFECTIVAMENTE SI ES UN NUMERO ROMANO A CONVERTIR
-        for caracter in numero:
+        for caracter in numero: 
             if caracter not in letras:
-                raise Exception()
+                raise Exception() #CONTIENE CARACTERES NO VALIDOS
         for arabigo, romano in valores:
             while numero[i:i + len(romano)] == romano:
                 total += arabigo
