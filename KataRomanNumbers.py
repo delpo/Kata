@@ -5,7 +5,7 @@ Created on 05/12/2014
 
 Funciona con numeros de 0 a 3999 (mayores a ese rango tienen una barra superior las letras
 
-v 1.0
+v 1.5
 ''' 
 
 def convierteRomanoArabigo(numero):
@@ -28,6 +28,15 @@ def convierteRomanoArabigo(numero):
                 i += len(romano)
         return total
     
+def convierteArabigoaRomano(numero):
+    pass
+    try: #ES UN NUMERO ARABIGO, OK
+        numero =  int(numero)
+        
+        return numero
+    except ValueError: #NO ES UN NUMERO ARABIGO
+        raise Exception() 
+    
 valores = ["900","MCMXCIX","XLILXII","XXXVIII","XLIX","","XMCXIZ","mmm"]
 for i in range(0,len(valores)):
     try:
@@ -35,6 +44,17 @@ for i in range(0,len(valores)):
         print("---")
     except Exception:
         print("No se pudo calcular, tiene caracteres que no pertenecen al sistema numérico romano.")
+        print("---")
+        
+print("==========================\n\n==========================")        
+          
+valores = [0,1,10,25,50,100,250,135, "x"]
+for i in range(0,len(valores)):
+    try:
+        print(convierteArabigoaRomano(valores[i]))
+        print("---")
+    except Exception:
+        print("No se pudo calcular, no es un número arábigo válido")
         print("---")
 
             
