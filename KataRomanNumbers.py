@@ -3,7 +3,7 @@ Created on 05/12/2014
 
 @author: A. Carlos del Pozo Muela
 
-Funciona con numeros de 0 a 3999 (mayores a ese rango tienen una barra superior las letras
+Funciona con numeros de 0 a 3999 (mayores a ese rango tienen una barra superior las letras)
 
 v 2.0
 ''' 
