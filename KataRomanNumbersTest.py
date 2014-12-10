@@ -2,13 +2,15 @@
 Created on 10/12/2014
 
 @author: delpo
+
+v 4
 '''
 
 import KataRomanNumbers
 import unittest
 
 class TestConValoresValidos(unittest.TestCase):
-    respuestasCorrectas = ( (1, 'I'),
+    respuestasCorrectas = ((1, 'I'),
                      (2, 'II'),
                      (3, 'III'),
                      (4, 'IV'),
@@ -66,40 +68,30 @@ class TestConValoresValidos(unittest.TestCase):
                      (3999, 'MMMCMXCIX'))
     
     
-    def testtoInt(self):
-        print("--Probamos conversión de número romano a arábigo--")
+    def testsOk(self):
+        print("--Probamos int a roman y viceversa con todos los numeros--")
+        espacio = "==================="
+        print(espacio)
         for arabigo, romano in self.respuestasCorrectas:
-            resultado = KataRomanNumbers.getInt(romano)
-            if not (self.assertEqual(arabigo, resultado)):
-                print("Numero {}: OK {}".format(romano, resultado))
+            resultadoInt = KataRomanNumbers.getInt(romano)
+            resultadoRoman = KataRomanNumbers.getRoman(arabigo)
+            if not (self.assertEqual(arabigo, resultadoInt) and self.assertEqual(romano, resultadoRoman)):
+                print("{} > {} OK\n{} > {} OK\n{}".format(romano, resultadoInt,arabigo,resultadoRoman,espacio))
             else:
-                print("Numero {}: ERROR {}".format(romano, resultado))
-        print("--Testeos completados--")
-        
-    def testtoRoman(self):
-        print("--Probamos conversión de número arábigo a romano--")
-        for arabigo, romano in self.respuestasCorrectas:
-            resultado = KataRomanNumbers.getRoman(arabigo)
-            if not (self.assertEqual(romano, resultado)):
-                print("Numero {}: OK {}".format(arabigo, resultado))
-            else:
-                print("Numero {}: ERROR {}".format(arabigo, resultado))
+                print("{} > {} ERROR\n{} > {} ERROR\n{}".format(romano, resultadoInt,arabigo,resultadoRoman,espacio))
         print("--Testeos completados--")
         
     def testError(self):
         print("--Probamos primero casos que fallan--")
-        fails = [0,50000]
-        for i in fails:
+        for i in [0,50000,"XZ"]:
             try:
-                KataRomanNumbers.getRoman(i)
+                if(i != "XZ"): KataRomanNumbers.getRoman(i)
+                else: KataRomanNumbers.getInt(i)
                 print("Con valor {} No falla y debería fallar....ERROR :)".format(i))
             except KataRomanNumbers.OutOfRange:
                 print("Con valor {} Da error, funciona OK :)".format(i))
-        fail = "XZ"
-        try:
-                KataRomanNumbers.getInt(fail)
-                print("Con valor {} No falla y debería fallar....ERROR :)".format(fail))
-        except KataRomanNumbers.NotValidRomanNumeral:
-                print("Con valor {} Da error, funciona OK :)".format(fail))
+            except KataRomanNumbers.NotValidRomanNumeral:
+                print("Con valor {} Da error, funciona OK :)".format(i))
+                
 if __name__ == '__main__':
     unittest.main()
