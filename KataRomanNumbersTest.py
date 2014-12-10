@@ -1,0 +1,105 @@
+'''
+Created on 10/12/2014
+
+@author: delpo
+'''
+
+import KataRomanNumbers
+import unittest
+
+class TestConValoresValidos(unittest.TestCase):
+    respuestasCorrectas = ( (1, 'I'),
+                     (2, 'II'),
+                     (3, 'III'),
+                     (4, 'IV'),
+                     (5, 'V'),
+                     (6, 'VI'),
+                     (7, 'VII'),
+                     (8, 'VIII'),
+                     (9, 'IX'),
+                     (10, 'X'),
+                     (50, 'L'),
+                     (100, 'C'),
+                     (500, 'D'),
+                     (1000, 'M'),
+                     (31, 'XXXI'),
+                     (148, 'CXLVIII'),
+                     (294, 'CCXCIV'),
+                     (312, 'CCCXII'),
+                     (421, 'CDXXI'),
+                     (528, 'DXXVIII'),
+                     (621, 'DCXXI'),
+                     (782, 'DCCLXXXII'),
+                     (870, 'DCCCLXX'),
+                     (941, 'CMXLI'),
+                     (1043, 'MXLIII'),
+                     (1110, 'MCX'),
+                     (1226, 'MCCXXVI'),
+                     (1301, 'MCCCI'),
+                     (1485, 'MCDLXXXV'),
+                     (1509, 'MDIX'),
+                     (1607, 'MDCVII'),
+                     (1754, 'MDCCLIV'),
+                     (1832, 'MDCCCXXXII'),
+                     (1993, 'MCMXCIII'),
+                     (2074, 'MMLXXIV'),
+                     (2152, 'MMCLII'),
+                     (2212, 'MMCCXII'),
+                     (2343, 'MMCCCXLIII'),
+                     (2499, 'MMCDXCIX'),
+                     (2574, 'MMDLXXIV'),
+                     (2646, 'MMDCXLVI'),
+                     (2723, 'MMDCCXXIII'),
+                     (2892, 'MMDCCCXCII'),
+                     (2975, 'MMCMLXXV'),
+                     (3051, 'MMMLI'),
+                     (3185, 'MMMCLXXXV'),
+                     (3250, 'MMMCCL'),
+                     (3313, 'MMMCCCXIII'),
+                     (3408, 'MMMCDVIII'),
+                     (3501, 'MMMDI'),
+                     (3610, 'MMMDCX'),
+                     (3743, 'MMMDCCXLIII'),
+                     (3844, 'MMMDCCCXLIV'),
+                     (3888, 'MMMDCCCLXXXVIII'),
+                     (3940, 'MMMCMXL'),
+                     (3999, 'MMMCMXCIX'))
+    
+    
+    def testtoInt(self):
+        print("--Probamos conversión de número romano a arábigo--")
+        for arabigo, romano in self.respuestasCorrectas:
+            resultado = KataRomanNumbers.getInt(romano)
+            if not (self.assertEqual(arabigo, resultado)):
+                print("Numero {}: OK {}".format(romano, resultado))
+            else:
+                print("Numero {}: ERROR {}".format(romano, resultado))
+        print("--Testeos completados--")
+        
+    def testtoRoman(self):
+        print("--Probamos conversión de número arábigo a romano--")
+        for arabigo, romano in self.respuestasCorrectas:
+            resultado = KataRomanNumbers.getRoman(arabigo)
+            if not (self.assertEqual(romano, resultado)):
+                print("Numero {}: OK {}".format(arabigo, resultado))
+            else:
+                print("Numero {}: ERROR {}".format(arabigo, resultado))
+        print("--Testeos completados--")
+        
+    def testError(self):
+        print("--Probamos primero casos que fallan--")
+        fails = [0,50000]
+        for i in fails:
+            try:
+                KataRomanNumbers.getRoman(i)
+                print("Con valor {} No falla y debería fallar....ERROR :)".format(i))
+            except KataRomanNumbers.OutOfRange:
+                print("Con valor {} Da error, funciona OK :)".format(i))
+        fail = "XZ"
+        try:
+                KataRomanNumbers.getInt(fail)
+                print("Con valor {} No falla y debería fallar....ERROR :)".format(fail))
+        except KataRomanNumbers.NotValidRomanNumeral:
+                print("Con valor {} Da error, funciona OK :)".format(fail))
+if __name__ == '__main__':
+    unittest.main()
